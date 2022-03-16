@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
+const bcrypt = require('bcrypt');
+
 
 class User extends Model {}
 
@@ -32,13 +34,17 @@ User.init(
     }
   },
   {
+    hooks: {
+
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "user"
+    modelName: 'user'
   }
 );
+
 
 module.exports = User;
 

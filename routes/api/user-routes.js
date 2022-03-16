@@ -3,7 +3,7 @@ const { User } = require("../../models");
 
 router.get("/", (req, res) => {
   User.findAll({
-    attributes: { exclude: ["password"] }
+    attributes: { exclude: ['password'] }
   })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
@@ -14,14 +14,14 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   User.findOne({
-    attributes: { exclude: ["password"] },
+    attributes: { exclude: ['password'] },
     where: {
       id: req.params.id
     }
   })
     .then(dbUserData => {
       if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
+        res.status(404).json({ message: 'No user found with this id' });
         return;
       }
       res.json(dbUserData);
@@ -46,10 +46,10 @@ router.post("/", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
-  // expects {username: "Lernantino", email: "lernantino@gmail.com", password: "password1234"}
+// PUT /api/users/1
+router.put('/:id', (req, res) => {
+  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
-  // pass in req.body instead to only update what"s passed through
   User.update(req.body, {
     where: {
       id: req.params.id
@@ -57,7 +57,7 @@ router.put("/:id", (req, res) => {
   })
     .then(dbUserData => {
       if (!dbUserData[0]) {
-        res.status(404).json({ message: "No user found with this id" });
+        res.status(404).json({ message: 'No user found with this id' });
         return;
       }
       res.json(dbUserData);
